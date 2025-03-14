@@ -28,6 +28,7 @@ public class KafkaEventHandler {
     @KafkaHandler
     void handler(@Payload EventChangerEvent event) {
         LOGGER.info("Received event {}", event);
-        kafkaEventService.addAll(kafkaMapper.toChangedEvent(event), event.getEventSubscribers());
+        var changedEvent = kafkaMapper.toChangedEvent(event);
+        kafkaEventService.addAll(changedEvent, event.getEventSubscribers());
     }
 }

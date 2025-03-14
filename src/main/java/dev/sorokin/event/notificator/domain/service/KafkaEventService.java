@@ -31,11 +31,12 @@ public class KafkaEventService {
 //    }
 
     public void addAll(ChangedEvent changedEvent, List<Long> subscribers) {
-        LOGGER.info("Add changed event {} to subscribers", changedEvent);
+        LOGGER.info("Try adding changed event {} to subscribers", changedEvent);
         subscribers
                 .forEach((sId) -> {
                     ChangedEventEntity changedEventEntity = changedEventMapper.toEntity(changedEvent, sId);
                     eventRepository.save(changedEventEntity);
                 });
+        LOGGER.info("SUCCESS, changed event added to subscribers = {}", changedEvent);
     }
 }

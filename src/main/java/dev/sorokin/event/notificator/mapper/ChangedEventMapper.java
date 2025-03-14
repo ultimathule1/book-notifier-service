@@ -11,9 +11,9 @@ public interface ChangedEventMapper {
     @Mapping(target = "isRead", expression = "java(false)")
     ChangedEventEntity toEntity(ChangedEvent changedEvent);
 
-    default ChangedEventEntity toEntity(ChangedEvent changedEvent, Long id) {
+    default ChangedEventEntity toEntity(ChangedEvent changedEvent, Long subscriberId) {
         ChangedEventEntity changedEventEntity = toEntity(changedEvent);
-        changedEventEntity.setUserId(id);
+        changedEventEntity.setUserId(subscriberId);
         return changedEventEntity;
     }
 }
