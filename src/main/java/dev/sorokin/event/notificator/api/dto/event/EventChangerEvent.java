@@ -26,8 +26,6 @@ public class EventChangerEvent {
     @NotNull
     @Positive
     private Long ownerEventId;
-//    @NotNull
-//    private ChangedEventFields changedEventFields;
     @NotNull
     private List<Long> eventSubscribers;
 

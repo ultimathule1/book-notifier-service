@@ -1,4 +1,4 @@
-package dev.sorokin.event.notificator.exception;
+package dev.sorokin.event.notificator.exception.kafka;
 
 public class RetryableException extends RuntimeException{
 

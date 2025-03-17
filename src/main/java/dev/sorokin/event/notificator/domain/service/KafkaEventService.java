@@ -1,7 +1,7 @@
 package dev.sorokin.event.notificator.domain.service;
 
 import dev.sorokin.event.notificator.db.entity.ChangedEventEntity;
-import dev.sorokin.event.notificator.db.repository.EventRepository;
+import dev.sorokin.event.notificator.db.repository.NotificationsRepository;
 import dev.sorokin.event.notificator.domain.ChangedEvent;
 import dev.sorokin.event.notificator.mapper.ChangedEventMapper;
 import org.slf4j.Logger;
@@ -12,30 +12,21 @@ import java.util.List;
 
 @Service
 public class KafkaEventService {
-    private final EventRepository eventRepository;
+    private final NotificationsRepository notificationsRepository;
     private final ChangedEventMapper changedEventMapper;
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaEventService.class);
 
-    public KafkaEventService(EventRepository eventRepository, ChangedEventMapper changedEventMapper) {
-        this.eventRepository = eventRepository;
+    public KafkaEventService(NotificationsRepository notificationsRepository, ChangedEventMapper changedEventMapper) {
+        this.notificationsRepository = notificationsRepository;
         this.changedEventMapper = changedEventMapper;
     }
-
-//    public ChangedEvent add(ChangedEvent changedEvent) {
-//        LOGGER.info("Adding event {}", changedEvent);
-//        changedEvent.eventSubscribers()
-//                .stream()
-//                .forEach(s -> {
-//                    eventRepository.save()
-//                });
-//    }
 
     public void addAll(ChangedEvent changedEvent, List<Long> subscribers) {
         LOGGER.info("Try adding changed event {} to subscribers", changedEvent);
         subscribers
                 .forEach((sId) -> {
                     ChangedEventEntity changedEventEntity = changedEventMapper.toEntity(changedEvent, sId);
-                    eventRepository.save(changedEventEntity);
+                    notificationsRepository.save(changedEventEntity);
                 });
         LOGGER.info("SUCCESS, changed event added to subscribers = {}", changedEvent);
     }

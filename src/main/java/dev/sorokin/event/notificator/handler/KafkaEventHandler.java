@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
@@ -26,9 +27,13 @@ public class KafkaEventHandler {
     }
 
     @KafkaHandler
-    void handler(@Payload EventChangerEvent event) {
+    void handler(
+            @Payload EventChangerEvent event,
+            @Header("messageId") String messageId
+    ) {
         LOGGER.info("Received event {}", event);
         var changedEvent = kafkaMapper.toChangedEvent(event);
         kafkaEventService.addAll(changedEvent, event.getEventSubscribers());
+
     }
 }

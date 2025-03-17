@@ -1,8 +1,8 @@
 package dev.sorokin.event.notificator.config;
 
 import dev.sorokin.event.notificator.api.dto.event.EventChangerEvent;
-import dev.sorokin.event.notificator.exception.NotRetryableException;
-import dev.sorokin.event.notificator.exception.RetryableException;
+import dev.sorokin.event.notificator.exception.kafka.NotRetryableException;
+import dev.sorokin.event.notificator.exception.kafka.RetryableException;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.LongSerializer;
@@ -19,6 +19,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.listener.DeadLetterPublishingRecoverer;
 import org.springframework.kafka.listener.DefaultErrorHandler;
+import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.springframework.util.backoff.FixedBackOff;

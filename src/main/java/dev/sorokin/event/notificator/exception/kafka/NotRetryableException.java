@@ -1,4 +1,4 @@
-package dev.sorokin.event.notificator.exception;
+package dev.sorokin.event.notificator.exception.kafka;
 
 public class NotRetryableException extends RuntimeException {
     public NotRetryableException(String message, Throwable cause) {
