@@ -1,6 +1,5 @@
 package dev.sorokin.event.notificator.api.dto.event;
 
-import dev.sorokin.event.notificator.api.dto.FieldChange;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;

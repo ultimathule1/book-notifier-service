@@ -1,6 +1,6 @@
 package dev.sorokin.event.notificator.mapper;
 
-import dev.sorokin.event.notificator.api.dto.FieldChange;
+import dev.sorokin.event.notificator.api.dto.event.FieldChange;
 import dev.sorokin.event.notificator.api.dto.event.EventChangerEvent;
 import dev.sorokin.event.notificator.domain.ChangedEvent;
 import org.mapstruct.Mapper;

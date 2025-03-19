@@ -23,15 +23,11 @@ public interface NotificationsRepository extends JpaRepository<ChangedEventEntit
     @Transactional
     void updateIsReadAsTrueByUserIdAndId(Long userId, Long id);
 
-//    @Modifying
-//    @Transactional
-//    void deleteByIsReadEquals(boolean isRead);
-
     @Modifying
     @Transactional
     @Query(value = """
     DELETE FROM users_notifications e
     WHERE (e.created_at + INTERVAL '1 WEEK') < CURRENT_TIMESTAMP
     """, nativeQuery = true)
-    void deleteAllLatestSevenDays();
+    void deleteAllForLatestSevenDays();
 }

@@ -21,9 +21,16 @@ public class SchedulerConfig {
     }
 
     @Scheduled(cron = "${scheduler.interval.cron.every-minute}")
-    public void schedulerForRemoveReadNotifications() {
-        LOGGER.info("The planner for removing notifications for more than seven days is launched!");
-        notificationsRepository.deleteAllLatestSevenDays();
-        LOGGER.info("The planner for removing notifications for more than seven days is finished!");
+    public void schedulerForRemoveNotifications() {
+        LOGGER.info("The scheduler for removing notifications for more than seven days is launched!");
+        notificationsRepository.deleteAllForLatestSevenDays();
+        LOGGER.info("The scheduler for removing notifications for more than seven days is finished!");
+    }
+
+
+    //TODO: create scheduler for idempotency
+    public void schedulerForRemoveOldIdempotentMessages() {
+        LOGGER.info("The scheduler for removing idempotency messages for more than seven days is launched!");
+
     }
 }

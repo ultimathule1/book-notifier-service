@@ -1,4 +1,4 @@
-package dev.sorokin.event.notificator.api.dto;
+package dev.sorokin.event.notificator.api.dto.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
