@@ -1,5 +1,6 @@
 package dev.sorokin.event.notificator.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.sorokin.event.notificator.api.dto.event.FieldChange;
 import jakarta.validation.constraints.NotNull;
@@ -9,6 +10,7 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter
 @Setter
 public class UserEventChangesDto {

@@ -3,7 +3,9 @@ package dev.sorokin.event.notificator.api.controller;
 import dev.sorokin.event.notificator.api.dto.MarkAsReadNotificationsDto;
 import dev.sorokin.event.notificator.api.dto.UserEventChangesDto;
 import dev.sorokin.event.notificator.domain.ChangedEvent;
+import dev.sorokin.event.notificator.domain.NotificationChangedEvent;
 import dev.sorokin.event.notificator.domain.service.NotificationService;
+import dev.sorokin.event.notificator.mapper.NotificationChangedEventRespMapper;
 import dev.sorokin.event.notificator.mapper.UserEventsChangesRespMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,23 +26,25 @@ public class NotificationController {
     private static final Logger LOGGER = LoggerFactory.getLogger(NotificationController.class);
     private final NotificationService notificationService;
     private final UserEventsChangesRespMapper responseMapper;
+    private final NotificationChangedEventRespMapper changedEventMapper;
 
 
-    public NotificationController(NotificationService notificationService, UserEventsChangesRespMapper responseMapper) {
+    public NotificationController(NotificationService notificationService, UserEventsChangesRespMapper responseMapper, NotificationChangedEventRespMapper changedEventMapper) {
         this.notificationService = notificationService;
         this.responseMapper = responseMapper;
+        this.changedEventMapper = changedEventMapper;
     }
 
     @GetMapping
     ResponseEntity<List<UserEventChangesDto>> getUnreadNotificationsCurrentUser() {
         LOGGER.info("Received request to get unread notifications for current user");
-        List<ChangedEvent> changedEvents = notificationService.getUnreadNotificationsCurrentUser();
+        List<NotificationChangedEvent> changedEvents = notificationService.getUnreadNotificationsCurrentUser();
 
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(changedEvents
                         .stream()
-                        .map(responseMapper::toDto)
+                        .map(changedEventMapper::toDto)
                         .toList()
                 );
     }
@@ -48,7 +52,7 @@ public class NotificationController {
     @PostMapping
     ResponseEntity<Void> markNotificationAsRead(
             @RequestBody MarkAsReadNotificationsDto notificationsDto
-            ) {
+    ) {
         LOGGER.info("Received request to mark notifications as read = {}", notificationsDto);
         notificationService.markNotificationAsRead(notificationsDto.getNotificationIds());
         return ResponseEntity

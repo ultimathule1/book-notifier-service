@@ -27,7 +27,7 @@ public class IdempotencyMessageEntity {
     @Column(name = "event_id", nullable = false)
     private Long eventId;
 
-    @Column(name = "user_changed_id", nullable = false)
+    @Column(name = "user_changed_id")
     private Long userChangedId;
 
     @Column(name = "message_id", nullable = false, unique = true)

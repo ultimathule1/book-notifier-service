@@ -10,7 +10,7 @@
     </parent>
     <groupId>dev.sorokin</groupId>
     <artifactId>EventNotificator</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>EventNotificator</name>
     <description>EventNotificator</description>
 

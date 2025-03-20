@@ -2,7 +2,9 @@ package dev.sorokin.event.notificator.domain.service;
 
 import dev.sorokin.event.notificator.db.repository.NotificationsRepository;
 import dev.sorokin.event.notificator.domain.ChangedEvent;
+import dev.sorokin.event.notificator.domain.NotificationChangedEvent;
 import dev.sorokin.event.notificator.mapper.ChangedEventMapper;
+import dev.sorokin.event.notificator.mapper.NotificationChangedEventMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -17,17 +19,19 @@ public class NotificationService {
     private static final Logger LOGGER = LoggerFactory.getLogger(NotificationService.class);
     private final NotificationsRepository notificationsRepository;
     private final ChangedEventMapper changedEventMapper;
+    private final NotificationChangedEventMapper notificationChangedEventMapper;
 
-    public NotificationService(NotificationsRepository notificationsRepository, ChangedEventMapper changedEventMapper) {
+    public NotificationService(NotificationsRepository notificationsRepository, ChangedEventMapper changedEventMapper, NotificationChangedEventMapper notificationChangedEventMapper) {
         this.notificationsRepository = notificationsRepository;
         this.changedEventMapper = changedEventMapper;
+        this.notificationChangedEventMapper = notificationChangedEventMapper;
     }
 
-    public List<ChangedEvent> getUnreadNotificationsCurrentUser() {
+    public List<NotificationChangedEvent> getUnreadNotificationsCurrentUser() {
         Long userId = getCurrentUserId();
-        return notificationsRepository.findAllByUserIdIsAndIsReadFalse(userId)
+        return notificationsRepository.findAllBySubscriberIdIsAndIsReadFalse(userId)
                 .stream()
-                .map(changedEventMapper::toDomain)
+                .map(notificationChangedEventMapper::toDomain)
                 .toList();
     }
 

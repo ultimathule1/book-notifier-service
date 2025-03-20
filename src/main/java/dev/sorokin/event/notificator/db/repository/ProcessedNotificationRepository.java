@@ -15,8 +15,8 @@ public interface ProcessedNotificationRepository extends JpaRepository<Idempoten
     @Modifying
     @Transactional
     @Query(value = """
-    DELETE FROM idempotency m
-    WHERE (m.created_at + INTERVAL '1 WEEK') < CURRENT_TIMESTAMP
-    """, nativeQuery = true)
+            DELETE FROM idempotency m
+            WHERE (m.created_at + INTERVAL '1 WEEK') < CURRENT_TIMESTAMP
+            """, nativeQuery = true)
     void deleteAllForLatestSevenDays();
 }

@@ -4,8 +4,9 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 public record ChangedEvent(
-        Long userId,
+        Long userChangedId,
         Long eventId,
+        Long ownerEventId,
         String nameOld,
         String nameNew,
         Integer maxPlacesOld,

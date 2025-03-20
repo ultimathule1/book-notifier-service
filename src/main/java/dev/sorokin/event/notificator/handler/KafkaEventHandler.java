@@ -35,7 +35,6 @@ public class KafkaEventHandler {
         this.kafkaMapper = kafkaMapper;
     }
 
-
     @Transactional
     @KafkaHandler
     void handler(

@@ -10,7 +10,6 @@ import org.mapstruct.Named;
 @Mapper(componentModel = "spring")
 public interface EventKafkaMapper {
 
-    @Mapping(target = "eventId", source = "eventId")
     @Mapping(target = "nameOld", source = "fieldEventName", qualifiedByName = "extractOld")
     @Mapping(target = "nameNew", source = "fieldEventName", qualifiedByName = "extractNew")
     @Mapping(target = "maxPlacesOld", source = "fieldMaxPlaces", qualifiedByName = "extractOld")
